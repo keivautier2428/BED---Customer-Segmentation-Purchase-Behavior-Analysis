@@ -1,0 +1,4 @@
+segment,customers,avg_spend,median_spend,avg_orders,avg_order_value,pct_of_customers,revenue_share_pct
+High-Value Customers,4,6413.81,5988.18,12.5,1022.76,2.1,27.2
+Mid-Value Shoppers,106,528.88,359.15,1.14,477.57,56.1,59.4
+Low-Value / One-Time Customers,79,159.88,164.8,1.13,147.54,41.8,13.4
