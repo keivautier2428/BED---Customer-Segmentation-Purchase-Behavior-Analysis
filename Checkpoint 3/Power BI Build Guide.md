@@ -79,11 +79,14 @@ Expected values (for checking your work once built): Total Revenue ≈ **£106,1
 
 ## Step 5 — Page 2: Trend & Comparison Analysis
 
-1. Add a **Line Chart**: Axis = `invoices[invoice_date]` (set to Hour granularity via the field's
-   drill level), Value = `Total Orders`.
-2. Add a **Clustered Column Chart**: Axis = `customers[country]`, Values = `Total Revenue` split by
-   `invoices[is_cancelled]` (drag `is_cancelled` into Legend).
-3. Add a **Slicer** on `invoices[invoice_date]`, set to "Between" (a date/time range slicer).
+1. Power BI's date hierarchy stops at Day, so first add an hour column: right-click `invoices` →
+   **New column** → `Hour = HOUR(invoices[invoice_date])`.
+2. Add a **Line Chart**: X-axis = `invoices[Hour]`, Y-axis = `Total Orders`.
+3. Add a **Clustered Column Chart**: X-axis = `customers[country]`, Y-axis = `invoices[invoice_no]`
+   (set to **Count**), Legend = `invoices[is_cancelled]`. Use a count here, not `Total Revenue` —
+   that measure always filters to completed orders, so the cancelled bars would come out wrong.
+4. Add a **Card** with `Cancelled Order Rate` next to the column chart.
+5. Add a **Slicer** on `invoices[invoice_date]`, set to "Between" (a date/time range slicer).
 
 ## Step 6 — Page 3: Deep Dive / Segmentation
 
@@ -92,6 +95,7 @@ Expected values (for checking your work once built): Total Revenue ≈ **£106,1
 2. Add a second **Donut Chart**: Legend = `customer_segments[segment]`, Value = Sum of
    `customer_segments[total_spend]`.
 3. Add a **Scatter Chart**: X = `customer_segments[order_count]`, Y = `customer_segments[total_spend]`,
+   Values = `customer_segments[customer_id]` (without this, all customers collapse into one dot),
    Legend = `customer_segments[segment]`. In Format → Y-axis / X-axis, turn on **Logarithmic scale**
    (matches `customer_segments_scatter.png`, since spend is heavily skewed).
 4. Add a **Table**: columns = `customer_id`, `country`, `segment`, `total_spend`, `order_count`.
